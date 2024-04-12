@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDVIy7lCk5TKx9nTkD2ZtLmW7SbHJZtSo4",
-  authDomain: "note-maker-app-6efb9.firebaseapp.com",
-  projectId: "note-maker-app-6efb9",
-  storageBucket: "note-maker-app-6efb9.appspot.com",
-  messagingSenderId: "653453396162",
-  appId: "1:653453396162:web:82d53965f9bd4d2139535b",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 // Initialize Firebase
