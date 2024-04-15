@@ -89,6 +89,7 @@ export const Modal = ({ open, handleDialog, saveNote, updateNote }) => {
       dispatch(setTitle(null));
       dispatch(setDescription(null));
       dispatch(setLinks([]));
+      dispatch(setBackgroundColor("white"));
       saveNote({
         title: title,
         description: description,

@@ -78,7 +78,7 @@
   align-items: center;
   margin: 2vw;
   width: 73vw;
-  height: 70vh;
+  max-height: 70vh;
   padding: 1vw;
   overflow-x: hidden;
   overflow-y: scroll;
