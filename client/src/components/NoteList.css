@@ -111,7 +111,7 @@
   border-radius: 7px;
   margin: 0.8vw;
   cursor: pointer;
-  padding: 0.5vw 1vw;
+  padding: 1vw;
   background-color: transparent;
   transition: background-color 0.3s ease;
 }

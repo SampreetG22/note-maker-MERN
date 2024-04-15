@@ -11,7 +11,9 @@ import {
   setDescription,
   setLinks,
   setMediaLink,
+  setBackgroundColor,
 } from "../redux/slices/notesSlice";
+import { TwitterPicker } from "react-color";
 
 export const Modal = ({ open, handleDialog, saveNote, updateNote }) => {
   const title = useSelector((state) => state.notes.title);
@@ -19,6 +21,7 @@ export const Modal = ({ open, handleDialog, saveNote, updateNote }) => {
   const mediaLink = useSelector((state) => state.notes.mediaLink);
   const links = useSelector((state) => state.notes.links);
   const currentSelection = useSelector((state) => state.notes.currentSelection);
+  const background = useSelector((state) => state.notes.backgroundColor);
   const dispatch = useDispatch();
 
   const handleTitleChange = (e) => {
@@ -90,8 +93,13 @@ export const Modal = ({ open, handleDialog, saveNote, updateNote }) => {
         title: title,
         description: description,
         links: links,
+        background: background,
       });
     }
+  };
+
+  const handleBackgroundColor = (color) => {
+    dispatch(setBackgroundColor(color.hex));
   };
 
   return (
@@ -102,7 +110,7 @@ export const Modal = ({ open, handleDialog, saveNote, updateNote }) => {
       PaperProps={{
         sx: {
           width: "80vw",
-          height: "100%",
+          minHeight: "80%",
           padding: "2%",
         },
       }}
@@ -122,7 +130,7 @@ export const Modal = ({ open, handleDialog, saveNote, updateNote }) => {
         <ReactQuill
           value={description}
           onChange={handleDescriptionChange}
-          placeholder="Enter description"
+          placeholder="Add note description"
           className="quillEditor"
           modules={{
             toolbar: [
@@ -167,7 +175,7 @@ export const Modal = ({ open, handleDialog, saveNote, updateNote }) => {
           />
           <Button
             className="addButton"
-            variant="contained"
+            variant="outlined"
             color="secondary"
             onClick={handleMediaLinkValidation}
           >
@@ -175,10 +183,13 @@ export const Modal = ({ open, handleDialog, saveNote, updateNote }) => {
           </Button>
         </div>
         <div className="previewContainer">{getAttachments()}</div>
-        <div className="emptyContainer2" />
+        <div className="backgroundPicker">
+          <p>Choose a background color for your note: </p>
+          <TwitterPicker onChange={handleBackgroundColor} />
+        </div>
         {currentSelection === "addNew" ? (
           <Button
-            variant="outlined"
+            variant="contained"
             color="secondary"
             className="saveButton"
             onClick={saveAndClearFields}
@@ -187,7 +198,7 @@ export const Modal = ({ open, handleDialog, saveNote, updateNote }) => {
           </Button>
         ) : (
           <Button
-            variant="outlined"
+            variant="contained"
             color="secondary"
             className="saveButton"
             onClick={() =>
@@ -195,6 +206,7 @@ export const Modal = ({ open, handleDialog, saveNote, updateNote }) => {
                 title: title,
                 description: description,
                 links: links,
+                background: background,
               })
             }
           >

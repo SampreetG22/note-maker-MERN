@@ -6,6 +6,7 @@ const notesDetailsSchema = new Schema(
     title: String,
     description: String,
     links: Object,
+    background: String,
   },
   { timestamps: true }
 );

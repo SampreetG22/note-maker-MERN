@@ -224,9 +224,12 @@ const NoteList = (props) => {
                 key={i}
                 className="eachNote"
                 onClick={() => handleNoteClick(each)}
+                style={{
+                  background: each.background ? each.background : "black",
+                }}
               >
                 <h3 className="eachTitle">{each.title}</h3>
-                <p className="eachDate">{formatDate(each.createdAt)}</p>
+                <p className="eachDate">- {formatDate(each.createdAt)}</p>
               </div>
               <IconButton aria-label="delete" onClick={() => deleteNote(each)}>
                 <DeleteIcon />

@@ -3,15 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userNotes: [],
   filteredNotes: [],
-  searchText: null,
+  searchText: "",
   title: "",
   sortBy: "",
   description: "",
   mediaLink: "",
   links: [],
-  currentUser: null,
+  currentUser: {},
   selectedNote: null,
   currentSelection: null,
+  backgroundColor: "white",
 };
 
 const notesSlice = createSlice({
@@ -51,6 +52,9 @@ const notesSlice = createSlice({
     setCurrentSelection: (state, action) => {
       state.currentSelection = action.payload;
     },
+    setBackgroundColor: (state, action) => {
+      state.backgroundColor = action.payload;
+    },
   },
 });
 
@@ -66,5 +70,6 @@ export const {
   setCurrentUser,
   setSelectedNote,
   setCurrentSelection,
+  setBackgroundColor,
 } = notesSlice.actions;
 export default notesSlice.reducer;
