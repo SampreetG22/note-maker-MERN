@@ -1,56 +1,54 @@
 const express = require("express");
-const Task = require("../models/notesModel");
+const Notes = require("../models/notesModel");
 
 const router = express.Router();
 
-//Create task
+// Create Notes
 router.post("/", async (request, response) => {
-  const { title, priority } = request.body;
+  const { user, note } = request.body;
   try {
-    const newTask = await Task.create({
-      title: title,
-      status: "Pending",
-      priority: priority ? priority : "Low",
+    const existingObject = await Notes.findOne({
+      user: user,
     });
-    response
-      .status(200)
-      .json({ new_task: newTask, message: "Task created successfully" });
+    if (existingObject) {
+      existingObject.notes.push(note);
+      await existingObject.save();
+    } else {
+      await Notes.create({
+        user: user,
+        notes: [note],
+      });
+    }
+    response.status(200).json({ message: "Note added successfully" });
   } catch (error) {
     response.status(500).json({ message: error.message });
   }
 });
 
-//Read tasks
+// Read Notes
 router.get("/", async (request, response) => {
+  const { user, sortBy } = request.query;
   try {
-    const tasks = await Task.find({}).sort({ createdAt: "asc" });
-    response.status(200).json({
-      tasks: tasks,
-    });
-  } catch (error) {
-    response.status(500).json({ message: error.message });
-  }
-});
-
-//Update task
-router.put("/", async (request, response) => {
-  const { _id, title, priority, status } = request.body;
-  try {
-    const existingTask = await Task.findOne({ _id: _id });
-    if (existingTask) {
-      const query = { _id: _id };
-      const updatedTask = await Task.findOneAndUpdate(query, {
-        title: title,
-        priority: priority,
-        status: status === "Done" ? status : "Pending",
-      });
+    const userNotes = await Notes.findOne({ user: user });
+    if (userNotes) {
+      let sortedNotes = userNotes.notes;
+      if (sortBy) {
+        sortedNotes.sort((a, b) => {
+          if (sortBy === "asc" || sortBy === "") {
+            return a.createdAt - b.createdAt;
+          } else if (sortBy === "desc") {
+            return b.createdAt - a.createdAt;
+          } else {
+            return a.createdAt - b.createdAt;
+          }
+        });
+      }
       response.status(200).json({
-        updated_task: updatedTask,
-        message: "Task updated successfully",
+        notes: sortedNotes,
       });
     } else {
-      response.status(404).json({
-        message: "Task not found",
+      response.status(200).json({
+        notes: [],
       });
     }
   } catch (error) {
@@ -58,40 +56,47 @@ router.put("/", async (request, response) => {
   }
 });
 
-//Update multiple tasks as done
-router.put("/markAll", async (request, response) => {
-  const { markedTasks } = request.body;
+// Update Notes
+router.put("/", async (request, response) => {
+  const { user, noteId, note } = request.body;
   try {
-    for (const task of markedTasks) {
-      await Task.updateOne({ _id: task._id }, { status: "Done" });
+    const targetObject = await Notes.findOne({ user: user });
+    if (targetObject) {
+      // Find the index of the note with the given noteId
+      const noteIndex = targetObject.notes.findIndex((note) =>
+        note._id.equals(noteId)
+      );
+      if (noteIndex !== -1) {
+        // Update the note object at the found index
+        targetObject.notes[noteIndex] = note;
+        await targetObject.save();
+        response.status(200).json({ message: "Note updated successfully" });
+      } else {
+        response.status(404).json({ message: "Note not found" });
+      }
+    } else {
+      response.status(404).json({ message: "User not found" });
     }
-    response.status(200).json({ message: "Tasks updated successfully" });
   } catch (error) {
     response.status(500).json({ message: error.message });
   }
 });
 
-//Delete task
+// Delete Note
 router.delete("/", async (request, response) => {
-  const { id } = request.query;
+  const { user, noteId } = request.body;
   try {
-    const tasksExists = await Task.findOne({ _id: id });
-    if (tasksExists) {
-      await Task.findOneAndDelete({ _id: id });
-      response.status(200).json({ message: "Task deleted successfully" });
+    const targetObject = await Notes.findOne({ user: user });
+    if (targetObject) {
+      const updatedNotes = targetObject.notes.filter(
+        (note) => !note._id.equals(noteId)
+      );
+      targetObject.notes = updatedNotes;
+      await targetObject.save();
+      response.status(200).json({ message: "Note deleted successfully" });
     } else {
-      response.status(404).json({ message: "Task not found" });
+      response.status(404).json({ message: "User not found" });
     }
-  } catch (error) {
-    response.status(500).json({ message: error.message });
-  }
-});
-
-//Delete all tasks
-router.delete("/deleteAll", async (request, response) => {
-  try {
-    await Task.deleteMany({});
-    response.status(200).json({ message: "All tasks deleted successfully" });
   } catch (error) {
     response.status(500).json({ message: error.message });
   }

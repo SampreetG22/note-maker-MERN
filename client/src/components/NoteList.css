@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+.mainNotesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Montserrat";
+}
+.headerContainer {
+  width: 94%;
+  height: 6vw;
+  background-color: purple;
+  margin-bottom: 1.5vw;
+  box-shadow: 0px 0px 10px #800080ba;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 3%;
+}
+.mainHeader {
+  font-family: "Poppins", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: white;
+  font-size: 2.5vw;
+  margin: 0;
+}
+.user {
+  color: white;
+  font-weight: 550;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 1.2vw;
+  justify-content: flex-end;
+}
+.logoutIcon {
+  color: white !important;
+}
+.welcomeText {
+  align-self: flex-start;
+  margin-left: 5%;
+  font-weight: 550;
+  font-size: 2vw;
+}
+.searchBar {
+  width: 73vw;
+  outline: none;
+  padding: 0.6vw;
+  border-radius: 5px;
+  border: 1px solid gray;
+  font-size: 1vw;
+}
+.searchButton {
+  height: 100% !important;
+}
+
+.titleAndSortContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.yourNotes {
+  font-weight: normal;
+  font-style: italic;
+}
+.sortByElement {
+  width: 12vw;
+  height: 3vw;
+  outline: none;
+  border-radius: 0.4vw;
+  cursor: pointer;
+  margin-left: 13%;
+}
+.notesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2vw;
+  width: 73vw;
+  height: 70vh;
+  padding: 1vw;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  box-shadow: 0px 0px 10px silver;
+  border-radius: 7px;
+}
+.notesContainer::-webkit-scrollbar {
+  width: 3px;
+}
+
+.notesContainer::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 7px;
+}
+
+.notesContainer::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.noteAndDeleteContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.eachNote {
+  width: 90% !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 0px 10px #8080807e;
+  border-radius: 7px;
+  margin: 0.8vw;
+  cursor: pointer;
+  padding: 0.5vw 1vw;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.eachNote:hover {
+  background-color: #80808021;
+  color: black;
+}
+.eachTitle {
+  font-size: 1.3vw;
+}
+.eachDate {
+  font-size: 1vw;
+}
+.floatingButton {
+  position: fixed !important;
+  bottom: 4% !important;
+  right: 3% !important;
+  z-index: 10;
+  width: 4vw !important;
+  height: 4vw !important;
+}
+.plusIcon {
+  font-size: 1.3vw !important;
+}
+.noNotesImage {
+  margin-top: 5%;
+  width: 20%;
+}
+@media screen and (max-width: 768px) {
+  .headerContainer {
+    height: 16vw;
+  }
+  .mainHeader {
+    font-family: "Poppins", cursive !important;
+    font-size: 4vw !important;
+  }
+  .user {
+    font-size: 3.5vw !important;
+  }
+  .welcomeText {
+    font-size: 5vw !important;
+  }
+  .searchBar {
+    width: 80vw;
+    padding: 1.5vw;
+    font-size: 3.5vw;
+  }
+  .notesContainer {
+    width: 90% !important;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+  }
+  .yourNotes {
+    font-size: 5vw;
+  }
+  .sortByElement {
+    width: 20vw !important;
+    height: 5vw !important;
+  }
+  .eachNote {
+    height: max-content !important;
+    padding-inline: 5%;
+  }
+  .eachTitle {
+    font-size: 4vw;
+  }
+  .eachDate {
+    font-size: 2.2vw;
+  }
+  .floatingButton {
+    width: 15vw !important;
+    height: 15vw !important;
+  }
+  .plusIcon {
+    font-size: 5vw !important;
+  }
+  .noNotesImage {
+    margin-top: 15%;
+    width: 30%;
+  }
+}

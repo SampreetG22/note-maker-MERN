@@ -30,11 +30,11 @@ import {
   setFormData,
   setError,
   setBackgroundIndex,
-  setShowPassword,
   setPasswordResetDialog,
   setSendEmail,
   setLoading,
 } from "../redux/slices/signinSlice";
+import { setShowPassword } from "../redux/slices/commonSlice";
 
 import { backgrounds } from "../assets/backgrounds";
 
@@ -43,7 +43,7 @@ function SignIn(props) {
   const formData = useSelector((state) => state.signin.formData);
   const error = useSelector((state) => state.signin.error);
   const backgroundIndex = useSelector((state) => state.signin.backgroundIndex);
-  const showPassword = useSelector((state) => state.signin.showPassword);
+  const showPassword = useSelector((state) => state.common.showPassword);
   const passwordResetDialog = useSelector(
     (state) => state.signin.passwordResetDialog
   );
@@ -78,6 +78,11 @@ function SignIn(props) {
       signInWithEmailAndPassword(auth, formData.email, formData.password)
         .then(() => {
           handleSnackBar(true, "Login successful", "success");
+          localStorage.setItem("userId", auth.currentUser.uid);
+          localStorage.setItem(
+            "expirationTime",
+            new Date().getTime() + 3600000
+          );
           dispatch(setLoading(false));
           navigate("/notes");
           dispatch(
@@ -160,7 +165,7 @@ function SignIn(props) {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Welcome to NOTES!fy...
             </Typography>
             <Box
               component="form"

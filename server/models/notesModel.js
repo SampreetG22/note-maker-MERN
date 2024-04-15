@@ -1,14 +1,23 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const taskSchema = new Schema(
+const notesDetailsSchema = new Schema(
   {
     title: String,
     description: String,
+    links: Object,
   },
   { timestamps: true }
 );
 
-const Task = mongoose.model("Task", taskSchema);
+const notesSchema = new Schema(
+  {
+    user: String,
+    notes: [notesDetailsSchema],
+  },
+  { timestamps: true }
+);
 
-module.exports = Task;
+const Notes = mongoose.model("Notes", notesSchema);
+
+module.exports = Notes;

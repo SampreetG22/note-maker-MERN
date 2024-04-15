@@ -17,17 +17,17 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setFormData,
   setChecked,
-  setShowPassword,
   setShowConfirmPassword,
   setError,
-  setShowDialog,
 } from "../redux/slices/signupSlice";
+import { setShowPassword, setShowDialog } from "../redux/slices/commonSlice";
 
 export default function SignUp(props) {
   const { handleSnackBar } = props;
@@ -35,12 +35,12 @@ export default function SignUp(props) {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.signup.formData);
   const checked = useSelector((state) => state.signup.checked);
-  const showPassword = useSelector((state) => state.signup.showPassword);
   const showConfirmPassword = useSelector(
     (state) => state.signup.showConfirmPassword
   );
   const error = useSelector((state) => state.signup.error);
-  const showDialog = useSelector((state) => state.signup.showDialog);
+  const showPassword = useSelector((state) => state.common.showPassword);
+  const showDialog = useSelector((state) => state.common.showDialog);
 
   const handleChange = (event) => {
     dispatch(
@@ -86,6 +86,13 @@ export default function SignUp(props) {
               handleSnackBar(true, "Registration Successful", "success");
               dispatch(setShowDialog(true));
             })
+            .then(() => {
+              updateProfile(auth.currentUser, {
+                displayName: formData.firstName + " " + formData.lastName,
+              }).catch((error) => {
+                handleSnackBar(true, error.message, "error");
+              });
+            })
             .catch((error) => {
               handleSnackBar(true, error.message, "error");
             });
@@ -122,7 +129,7 @@ export default function SignUp(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign up for NOTES!fy...
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
