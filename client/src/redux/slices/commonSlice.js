@@ -9,11 +9,11 @@ export const commonSlice = createSlice({
   name: "common",
   initialState,
   reducers: {
-    setShowPassword: (state, action) => {
-      state.showPassword = action.payload;
+    setShowPassword: (state, { payload }) => {
+      state.showPassword = payload;
     },
-    setShowDialog: (state, action) => {
-      state.showDialog = action.payload;
+    setShowDialog: (state, { payload }) => {
+      state.showDialog = payload;
     },
   },
 });

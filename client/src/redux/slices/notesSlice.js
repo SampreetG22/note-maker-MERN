@@ -19,41 +19,41 @@ const notesSlice = createSlice({
   name: "notes",
   initialState,
   reducers: {
-    setNotes: (state, action) => {
-      state.userNotes = action.payload;
+    setNotes: (state, { payload }) => {
+      state.userNotes = payload;
     },
-    setFilteredNotes: (state, action) => {
-      state.filteredNotes = action.payload;
+    setFilteredNotes: (state, { payload }) => {
+      state.filteredNotes = payload;
     },
-    setSearchText: (state, action) => {
-      state.searchText = action.payload;
+    setSearchText: (state, { payload }) => {
+      state.searchText = payload;
     },
-    setSortBy: (state, action) => {
-      state.sortBy = action.payload;
+    setSortBy: (state, { payload }) => {
+      state.sortBy = payload;
     },
-    setTitle: (state, action) => {
-      state.title = action.payload;
+    setTitle: (state, { payload }) => {
+      state.title = payload;
     },
-    setDescription: (state, action) => {
-      state.description = action.payload;
+    setDescription: (state, { payload }) => {
+      state.description = payload;
     },
-    setMediaLink: (state, action) => {
-      state.mediaLink = action.payload;
+    setMediaLink: (state, { payload }) => {
+      state.mediaLink = payload;
     },
-    setLinks: (state, action) => {
-      state.links = action.payload;
+    setLinks: (state, { payload }) => {
+      state.links = payload;
     },
-    setCurrentUser: (state, action) => {
-      state.currentUser = action.payload;
+    setCurrentUser: (state, { payload }) => {
+      state.currentUser = payload;
     },
-    setSelectedNote: (state, action) => {
-      state.selectedNote = action.payload;
+    setSelectedNote: (state, { payload }) => {
+      state.selectedNote = payload;
     },
-    setCurrentSelection: (state, action) => {
-      state.currentSelection = action.payload;
+    setCurrentSelection: (state, { payload }) => {
+      state.currentSelection = payload;
     },
-    setBackgroundColor: (state, action) => {
-      state.backgroundColor = action.payload;
+    setBackgroundColor: (state, { payload }) => {
+      state.backgroundColor = payload;
     },
   },
 });
@@ -72,4 +72,5 @@ export const {
   setCurrentSelection,
   setBackgroundColor,
 } = notesSlice.actions;
+
 export default notesSlice.reducer;

@@ -16,27 +16,27 @@ const initialState = {
   showDialog: false,
 };
 
-export const signupSlice = createSlice({
+const signupSlice = createSlice({
   name: "signup",
   initialState,
   reducers: {
-    setFormData: (state, action) => {
-      state.formData = action.payload;
+    setFormData: (state, { payload }) => {
+      state.formData = payload;
     },
-    setChecked: (state, action) => {
-      state.checked = action.payload;
+    setChecked: (state, { payload }) => {
+      state.checked = payload;
     },
-    setShowPassword: (state, action) => {
-      state.showPassword = action.payload;
+    setShowPassword: (state, { payload }) => {
+      state.showPassword = payload;
     },
-    setShowConfirmPassword: (state, action) => {
-      state.showConfirmPassword = action.payload;
+    setShowConfirmPassword: (state, { payload }) => {
+      state.showConfirmPassword = payload;
     },
-    setError: (state, action) => {
-      state.error = action.payload;
+    setError: (state, { payload }) => {
+      state.error = payload;
     },
-    setShowDialog: (state, action) => {
-      state.showDialog = action.payload;
+    setShowDialog: (state, { payload }) => {
+      state.showDialog = payload;
     },
   },
 });
@@ -44,7 +44,6 @@ export const signupSlice = createSlice({
 export const {
   setFormData,
   setChecked,
-  setConfirmPassword,
   setShowPassword,
   setShowConfirmPassword,
   setError,

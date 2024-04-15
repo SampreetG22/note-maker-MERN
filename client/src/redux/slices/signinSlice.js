@@ -17,26 +17,26 @@ export const signinSlice = createSlice({
   name: "signin",
   initialState,
   reducers: {
-    setFormData: (state, action) => {
-      state.formData = action.payload;
+    setFormData: (state, { payload }) => {
+      state.formData = payload;
     },
-    setError: (state, action) => {
-      state.error = action.payload;
+    setError: (state, { payload }) => {
+      state.error = payload;
     },
-    setBackgroundIndex: (state, action) => {
-      state.backgroundIndex = action.payload; // Corrected assignment
+    setBackgroundIndex: (state, { payload }) => {
+      state.backgroundIndex = payload;
     },
-    setShowPassword: (state, action) => {
-      state.showPassword = action.payload;
+    setShowPassword: (state, { payload }) => {
+      state.showPassword = payload;
     },
-    setPasswordResetDialog: (state, action) => {
-      state.passwordResetDialog = action.payload;
+    setPasswordResetDialog: (state, { payload }) => {
+      state.passwordResetDialog = payload;
     },
-    setSendEmail: (state, action) => {
-      state.sendEmail = action.payload;
+    setSendEmail: (state, { payload }) => {
+      state.sendEmail = payload;
     },
-    setLoading: (state, action) => {
-      state.loading = action.payload;
+    setLoading: (state, { payload }) => {
+      state.loading = payload;
     },
   },
 });
